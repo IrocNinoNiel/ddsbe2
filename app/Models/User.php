@@ -12,4 +12,9 @@
         protected $fillable = [
         'username', 'password'
         ];
+
+
+        protected $hidden = [
+            'password',
+        ];
     }

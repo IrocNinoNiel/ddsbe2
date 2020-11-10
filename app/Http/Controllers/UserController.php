@@ -71,7 +71,6 @@
             $this->validate($this->request, $rules);
 
             $user = User::find($id);
-
             if($user == null) return $this->errorResponse('No Such User in the database',404);
 
             $user->username = $this->request->username;
