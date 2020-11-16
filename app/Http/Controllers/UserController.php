@@ -16,18 +16,18 @@
         }
         
         // Create User
-        public function addUsers(){
+        public function addUsers(Request $request){
 
             $rules = [
                 'username' => 'required|max:20',
                 'password' => 'required:max:20'
             ];
 
-            $this->validate($this->request, $rules);
+            $this->validate($request, $rules);
             $users = new User;
 
-            $users->username = $this->request->username;
-            $users->password = $this->request->password;
+            $users->username = $request->username;
+            $users->password = $request->password;
 
             $users->save();
             return $this->successResponse($users);
@@ -61,20 +61,20 @@
         }
 
         // Update User
-        public function updateUser($id){
-
+        public function updateUser(Request $request,$id){
             $rules = [
                 'username' => 'required|max:20',
                 'password' => 'required:max:20'
             ];
 
-            $this->validate($this->request, $rules);
+            $this->validate($request, $rules);
 
             $user = User::find($id);
+
             if($user == null) return $this->errorResponse('No Such User in the database',404);
 
-            $user->username = $this->request->username;
-            $user->password = $this->request->password;
+            $user->username = $request->username;
+            $user->password = $request->password;
 
             $user->save();
 
