@@ -1,9 +1,11 @@
 <?php
 
+
     namespace App\Http\Controllers;
 
     use Illuminate\Http\Request;
     use App\User;
+    use App\UserJob;
     use Illuminate\Http\Response;
     use App\Traits\ApiResponser;
 
@@ -20,14 +22,18 @@
 
             $rules = [
                 'username' => 'required|max:20',
-                'password' => 'required:max:20'
+                'password' => 'required:max:20',
+                'jobid' => 'required|numeric|min:1|not_in:0',
             ];
 
             $this->validate($request, $rules);
+            $userjob = UserJob::findOrFail($request->jobid);
             $users = new User;
 
             $users->username = $request->username;
             $users->password = $request->password;
+            $users->jobid = $request->jobid;
+
 
             $users->save();
             return $this->successResponse($users);
@@ -64,10 +70,12 @@
         public function updateUser(Request $request,$id){
             $rules = [
                 'username' => 'required|max:20',
-                'password' => 'required:max:20'
+                'password' => 'required:max:20',
+                'jobid' => 'required|numeric|min:1|not_in:0',
             ];
 
             $this->validate($request, $rules);
+            // $userjob = UserJob::findOrFail($request->jobid);
 
             $user = User::find($id);
 

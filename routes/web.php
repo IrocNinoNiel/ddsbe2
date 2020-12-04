@@ -27,6 +27,10 @@ $router->group(['prefix' => 'api'],function () use ($router) {
     $router->post('/users/add',['uses' => 'UserController@addUsers']);
     $router->put('/users/update/{id}',['uses' => 'UserController@updateUser']);
     $router->delete('/users/delete/{id}',['uses' => 'UserController@deleteUser']);
+
+    // UserJob
+    $router->get('/usersjob','UserJobController@index');
+    $router->get('/userjob/{id}','UserJobController@show');
 });
 
 
