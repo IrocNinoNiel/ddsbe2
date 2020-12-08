@@ -23,7 +23,10 @@
         }
 
         public function show($id){
-            $userjob = UserJob::findOrFail($id);
+            $userjob = UserJob::find($id);
+            if($userjob == null){
+                return null;
+            }
             return $this->successResponse($userjob);
         }
     }

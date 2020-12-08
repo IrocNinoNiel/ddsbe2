@@ -83,6 +83,7 @@
 
             $user->username = $request->username;
             $user->password = $request->password;
+            $user->jobid = $request->jobid;
 
             $user->save();
 
